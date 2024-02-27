@@ -10,6 +10,12 @@ Mirror project filesystems for metadata tracking.  It can be useful to have
 a direct path mirror between code that generates data and the location in a filesystem
 or object store that stores the data / artifacts it generates.
 
+### Example
+code lives at: `project/etl/my_etl_task.py::LiftDataTask`
+`fsmirror` output for associated: `project/etl/my_etl_task/LiftDataTask/out.parquet`
+`fsmirror` s3 output for associated: `s3://my.bucket/project/etl/my_etl_task/LiftDataTask.out.parquet`
+
+
 ### Usage
 
 * Create a configuration file like the one in `examples/example_config.yml`

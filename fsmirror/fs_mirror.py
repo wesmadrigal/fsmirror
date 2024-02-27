@@ -119,7 +119,7 @@ Mirror a class or function and return the relative path
             name = obj.__name__
         elif hasattr(obj, '__class__'):
             module = sys.modules[obj.__class__.__module__]
-            name = obj.__class__.__name__
+            name = f"{obj.__module__}/{obj.__class__.__name__}"
         else:
             raise FSMirrorException(f"FSMirror can only mirror classes or functions")
 
@@ -135,7 +135,7 @@ Mirror a class or function and return the relative path
         base = list(map(lambda x: x if '.' not in x else x.split('.')[0], base))
         base = "/".join(base)
         if with_id:
-            return f"{base}/{self._id}/{name}"
+            return f"{base}/{name}/{self._id}"
         else:
             return f"{base}/{name}"
 

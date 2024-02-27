@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     setuptools.setup(
         name="fsmirror",
-        version = 0.1,
+        version = 0.3,
         url="https://github.com/wesmadrigal/fsmirror",
         packages = setuptools.find_packages(exclude=[ "docs", "examples" ]),
         install_requires = base_packages,
