@@ -1,0 +1,33 @@
+# artifacts
+storage:
+  # local, s3, gcs, blob
+  provider: s3
+  # root file path, bucket, etc.
+  tenant: test.bucket
+  # prefix - if 'MIRROR' will mirror filesystem
+  namespace: MIRROR
+
+
+# Each mirror should be a subdirectory
+# within your project for example your
+# orchestrator codebase lives at the 
+# following path:
+#
+# /opt/orchestrator
+#
+# To mirror this subdirectory we would
+# add an "orchestrator" mirror as is
+# done below
+mirrors:
+  fsmirror:
+    # directory or subdirectory to split on
+    root: fsmirror
+    prefix: MIRROR
+    output_name: out
+    output_format: parquet
+
+  aipipeline:
+    root: aipipeline
+    prefix: MIRROR
+    output_name: out
+    output_format: pkl
