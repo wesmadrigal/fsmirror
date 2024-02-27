@@ -1,5 +1,9 @@
 name: fsmirror_actions
 
+env:
+  DOCKER_IMAGE_NAME: fsmirror
+  DOCKER_IMAGE_TAG: latest
+
 on: [push]
 
 jobs:
