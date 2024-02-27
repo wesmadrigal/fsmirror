@@ -49,7 +49,7 @@ class FSMirror:
         self._config = config
         self._mirror = mirror
         if mirror not in config['mirrors']:
-            raise FSMirrorException(f"Couldn't find mirror {mirror} please check the mirrors defined in {CONFIG_PATH}")
+            raise FSMirrorException(f"Couldn't find mirror {mirror} please check the mirrors defined in your config")
         self._root = self._config['mirrors'][mirror]['root']
         self._prefix = self._config['mirrors'][mirror]['prefix']
         self._output_name = self._config['mirrors'][mirror]['output_name']
