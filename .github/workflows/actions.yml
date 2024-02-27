@@ -26,4 +26,4 @@ jobs:
        python setup.py install
     - name: Python client tests
       run: |
-        pytest -s tests/client/test_client.py
+        pytest -s tests/test_mirror.py
