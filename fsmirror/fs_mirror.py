@@ -16,8 +16,6 @@ import yaml
 class FSMirrorException(Exception): pass
 
 
-
-
 def load_config(path:str = None) -> dict:
     if path:
         config = yaml.safe_load(pathlib.Path(path).read_text())
@@ -37,16 +35,16 @@ class FSMirror:
             self,
             config: dict,
             mirror: str = 'orchestrator',
-            id_method: str = 'date'
+            id_method: str = 'date',
+            take_last_instance: bool = True,
             ):
         """
-Constructor
-
         Parameters
         ----------
         config: dict of loaded config `yaml.safe_load(pathlib.Path(CONFIG_PATH).read_text()) -> dict`
-        mirror_root_dir: str of the root subdirectory to split on
+        mirror: str of the root subdirectory to split on
         id_method: str of method to use for generating ids options: ['date', 'uuid']
+        take_last_instance: bool of whether or not to take the final instance
         """
         self._config = config
         self._mirror = mirror
@@ -57,11 +55,13 @@ Constructor
         self._output_name = self._config['mirrors'][mirror]['output_name']
         self._output_format = self._config['mirrors'][mirror]['output_format']
         self._id = self._generate_id()
-
+        self._take_last = take_last_instance
+ 
 
     def _generate_id (
             self,
-            method: str = 'date'
+            method: str = 'date',
+            custom_func: typing.Optional[callable] = None,
             ) -> str:
         """
 Generate ids
@@ -69,6 +69,7 @@ Generate ids
         Parameters
         ----------
         method: str of method to use for generating id: ['date', 'uuid']
+        custom_func: callable custom function to generate ids with
 
         Returns
         ---------
@@ -80,6 +81,20 @@ Generate ids
             return str(uuid.uuid4())
         else:
             raise FSMirrorException(f"unknown id method {method}")
+
+
+    def get_last_root_ix (
+            self,
+            path_parts: typing.List[str]
+            ) -> int:
+        """
+Get the last index of the root for mirroring.
+        """
+        maxid = None
+        for i in range(len(path_parts)):
+            if path_parts[i] == self._root:
+                maxid = i
+        return maxid
 
 
     def mirror_relative (
@@ -109,7 +124,10 @@ Mirror a class or function and return the relative path
             raise FSMirrorException(f"FSMirror can only mirror classes or functions")
 
         parts = module.__file__.split('/')
-        base_ix = parts.index(self._root)
+        if self._take_last:
+            base_ix = self.get_last_root_ix(parts)
+        else:
+            base_ix = parts.index(self._root)
         if base_ix == -1:
             raise FSMirrorException(f"module {module.__file__} has no subdirectory: {self._root}")
         base = parts[base_ix:]
