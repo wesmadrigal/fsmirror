@@ -7,7 +7,7 @@ import os
 import pytest
 
 # internal
-from fsmirror import FSMirror, config
+from fsmirror import FSMirror, load_config
 
 
 class SomeTask(object):
@@ -22,7 +22,12 @@ def some_task(x):
     print(x)
 
 
+config_path = '/'.join(os.path.abspath(__file__).split('/')[0:-2])+'/examples/config.yml'
+config = load_config(config_path)
+
+
 def test_instantiation_with_mirror():
+    
     fm = FSMirror(config=config, mirror='fsmirror')
     assert True
 
@@ -66,8 +71,12 @@ def test_mirror_full_output_no_id():
     output = fm.mirror_full_output(some_task, with_id=False)
     assert output == f's3://test.bucket/fsmirror/tests/test_mirror/some_task/out.parquet'
 
-if __name__ == '__main__':
-    from fsmirror import config, FSMirror
+if __name__ == '__main__':  
+    from fsmirror import load_config, FSMirror
+
+    config_path = '/'.join(os.path.abspath(__file__).split('/')[0:-2])+'/examples/config.yml'
+    config = load_config(config_path)
+
     mirror = FSMirror(config=config, mirror='fsmirror')
 
 
@@ -81,4 +90,3 @@ if __name__ == '__main__':
     print(mirror.mirror_relative(some_task, with_id=False))
 
     print("")
-    print(os.path.abspath(__file__))

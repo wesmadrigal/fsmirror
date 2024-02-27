@@ -16,11 +16,20 @@ import yaml
 class FSMirrorException(Exception): pass
 
 
-CONFIG_PATH = os.getenv('FSMIRROR_CONFIG_PATH')
-try:
-    config = yaml.safe_load(pathlib.Path(CONFIG_PATH).read_text())
-except Exception as e:
-    raise FSMirrorException("Environment variable FSMIRROR_CONFIG_PATH must be set!")
+
+
+def load_config(path:str = None) -> dict:
+    if path:
+        config = yaml.safe_load(pathlib.Path(path).read_text())
+        return config
+    else:
+        CONFIG_PATH = os.getenv('FSMIRROR_CONFIG_PATH')
+        try:
+            config = yaml.safe_load(pathlib.Path(CONFIG_PATH).read_text())
+            return config
+        except Exception as e:
+            raise FSMirrorException("Environment variable FSMIRROR_CONFIG_PATH must be set!")
+    return None
 
 
 class FSMirror:
