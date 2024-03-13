@@ -7,8 +7,8 @@ pip install fsmirror
 
 ### Functionality
 Mirror project filesystems for metadata tracking.  It can be useful to have 
-a direct path mirror between code that generates data and the location in a filesystem
-or object store that stores the data / artifacts it generates.
+a direct path mirror between code that generates artifacts and the location in an
+object store that houses the artifact.
 
 ### Example
 code lives at: <br>
