@@ -13,12 +13,12 @@ object store that houses the artifact.
 ![fsmirror functionality](https://github.com/wesmadrigal/fsmirror/blob/main/docs/fsmirror.drawio.png)
 
 ### Example
-code lives at: <br>
-`project/etl/my_etl_task.py::LiftDataTask`
-`fsmirror` output for associated: <br>
-`project/etl/my_etl_task/LiftDataTask/out.parquet`
-`fsmirror` s3 output for associated: <br>
-`s3://my.bucket/project/etl/my_etl_task/LiftDataTask.out.parquet`
+code lives at:\
+`project/etl/my_etl_task.py::LiftDataTask`\
+`fsmirror` output for associated: <br>\
+`project/etl/my_etl_task/LiftDataTask/out.parquet`\
+`fsmirror` s3 output for associated: <br>\
+`s3://my.bucket/project/etl/my_etl_task/LiftDataTask.out.parquet`\
 
 
 ### Usage
