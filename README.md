@@ -10,6 +10,8 @@ Mirror project filesystems for metadata tracking.  It can be useful to have
 a direct path mirror between code that generates artifacts and the location in an
 object store that houses the artifact.
 
+![fsmirror functionality](https://github.com/wesmadrigal/fsmirror/blob/main/docs/fsmirror.drawio.png)
+
 ### Example
 code lives at: <br>
 `project/etl/my_etl_task.py::LiftDataTask`
