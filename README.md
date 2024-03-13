@@ -15,10 +15,8 @@ object store that houses the artifact.
 ### Example
 code lives at:\
 `project/etl/my_etl_task.py::LiftDataTask`\
-`fsmirror` output for associated: <br>\
-`project/etl/my_etl_task/LiftDataTask/out.parquet`\
-`fsmirror` s3 output for associated: <br>\
-`s3://my.bucket/project/etl/my_etl_task/LiftDataTask.out.parquet`\
+`fsmirror` output for associated:  `project/etl/my_etl_task/LiftDataTask/out.parquet`\
+`fsmirror` s3 output for associated: `s3://my.bucket/project/etl/my_etl_task/LiftDataTask.out.parquet`\
 
 
 ### Usage
